@@ -1,3 +1,4 @@
+#states.py
 from aiogram.fsm.state import State, StatesGroup
 
 class ClientStates(StatesGroup):
@@ -10,11 +11,12 @@ class ClientStates(StatesGroup):
     collecting_date = State()
     collecting_reason = State()
     collecting_phone = State()
+    decline_reason = State()
 
 class AdminStates(StatesGroup):
-    managing_blacklist = State()
-    select_time = State()
-    select_specialist = State()
+    processing_appointment = State()
+    selecting_date = State()
+    selecting_specialist = State()
 
 class SpecialistStates(StatesGroup):
     rating_client = State()
