@@ -1,3 +1,4 @@
+#keyboards.py
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 
 def client_main_keyboard():
@@ -19,7 +20,21 @@ def admin_main_keyboard():
         resize_keyboard=True,
         persistent=True
     )
-
+def confirmation_keyboard(appointment_id: int):
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(
+                    text="✅ Подтвердить",
+                    callback_data=f"confirm_{appointment_id}"
+                ),
+                InlineKeyboardButton(
+                    text="❌ Отменить",
+                    callback_data=f"cancel_{appointment_id}"
+                )
+            ]
+        ]
+    )
 def specialist_main_keyboard(has_appointments: bool = False):
     keyboard = [
         [KeyboardButton(text="📅 Расписание"), KeyboardButton(text="📊 Отчеты")]
@@ -44,5 +59,15 @@ def rating_keyboard(appointment_id: int):
     return InlineKeyboardMarkup(
         inline_keyboard=[
             [InlineKeyboardButton(text=str(i), callback_data=f"rate_{i}_{appointment_id}") for i in range(1, 6)]
+        ]
+    )
+
+def client_confirm_keyboard(appointment_id: int):
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(text="✅ Подтвердить", callback_data=f"client_confirm_{appointment_id}"),
+                InlineKeyboardButton(text="❌ Отказаться", callback_data=f"client_decline_{appointment_id}")
+            ]
         ]
     )
